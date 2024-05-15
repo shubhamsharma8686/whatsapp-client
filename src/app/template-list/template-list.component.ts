@@ -57,7 +57,7 @@ export class TemplateListComponent implements OnInit {
         })
       };
       this.userData = {to:(this.selectedTemplate?.number)?.toString(),body:this.selectedTemplate?.placeHolder}
-      this.http.post<any>('http://localhost:3000/api/data', this.userData, httpOptions)
+      this.http.post<any>('https://whatsapp-glj8.onrender.com/api/data', this.userData, httpOptions)
       .subscribe(
         (response) => {
           console.log('Form submitted successfully:', response);
