@@ -1,0 +1,16 @@
+/* home.component.css */
+
+.jumbotron {
+    background-color: #f8f9fa;
+    padding: 80px 20px;
+    margin-bottom: 0;
+  }
+  
+  .card {
+    margin-top: 30px;
+  }
+  
+  .btn-primary {
+    margin-top: 20px;
+  }
+  

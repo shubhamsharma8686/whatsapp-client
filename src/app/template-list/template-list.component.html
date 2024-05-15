@@ -1,0 +1,176 @@
+<!-- template-list.component.html -->
+
+<div class="container-fluid overall">
+  <div class="row">
+    <!-- Header Section -->
+    <div class="col-md-12 header-section">
+      <h2 class="main-heading">Template Management</h2>
+    </div>
+  </div>
+  <div class="row main-down">
+    <!-- Sidebar -->
+    <div class="col-md-3 sidebar">
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <h4>Add New Template</h4>
+          <hr />
+          <form (ngSubmit)="addNewTemplate()">
+            <div class="form-group">
+              <label for="templateName">Template Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="templateName"
+                name="templateName"
+                required
+                [(ngModel)]="newTemplateName"
+              />
+            </div>
+            <br />
+            <button type="submit" class="btn btn-success btn-block">
+              Create Template
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <h2 class="main-heading">Manage Templates</h2>
+          <hr />
+          <div class="template-list">
+            <div>
+              <a *ngFor="let template of templates"
+              (click)="editTemplate(template)"
+              class="list-group-item list-group-item-action">{{ template.name }}</a>
+            </div>
+            <div *ngIf="templates.length === 0" class="text-muted">
+              No templates available.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card shadow mb-4">
+        <hr />
+        <p>Scan this qr to receive message</p>
+        <img src="../../assets/download.svg" alt="Profile Picture" class="profile-qr">
+      </div>
+    </div>
+
+    <!-- Main Section -->
+    <!-- <div class="col-md-6 main-section">
+      <div class="card shadow mb-4">
+        
+      </div>
+    </div> -->
+    <!-- Sidebar -->
+    <div class="col-md-9">
+      <div class="row main-down">
+        <div class="col-md-8 sidebar main-down-left">
+          <!-- whatsapp message template -->
+          <div class="whatsapp-message mt-1" *ngIf="selectedTemplate" [style.backgroundColor]="selectedTemplate ? selectedTemplate.color : '#dcf8c6'">
+            <div class="message-header">
+                <img src="../../assets/logo-happy-coding_440x270_blue-transparent.png" alt="Profile Picture" class="profile-picture">
+            </div>
+            <div class="message-content">
+                <p>{{selectedTemplate ? selectedTemplate.placeHolder : ''}}</p>
+            </div>
+        </div>
+          <!-- Message Input with Send Button -->
+          <!-- <div class="input-group mb-3 fixed-button">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Type your message..."
+              aria-label="Message"
+              aria-describedby="send-button"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-primary"
+                type="button"
+                id="send-button"
+                (click)="sendMessage()"
+              >
+                Send
+              </button>
+            </div>
+          </div> -->
+        </div>
+        <div class="col-md-4 sidebar">
+          <div class="card shadow mb-4">
+            <!-- Template Edit Section (if selected) -->
+            <div>
+              <div class="card shadow mb-4">
+                <div class="card-body">
+                  <!-- <app-template-edit
+                    [template]="selectedTemplate"
+                  ></app-template-edit> -->
+                  <h2>
+                    {{ selectedTemplate ? selectedTemplate.id ? "Edit Template" : "Add New Template" : '' }}
+                  </h2>
+
+                  <form (ngSubmit)="saveTemplate()" method="post">
+                    <div class="form-group">
+                      <label for="name">Template Name:</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="form-control"
+                        [ngModel]="selectedTemplate ? selectedTemplate.name : ''"
+                        (ngModelChange)="selectedTemplate ? selectedTemplate.name = $event : null" 
+                        required
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="name">Template Color:</label>
+                      <input
+                        type="color"
+                        id="color"
+                        name="color"
+                        class="form-control"
+                        [ngModel]="selectedTemplate ? selectedTemplate.color : ''"
+                        (ngModelChange)="selectedTemplate ? selectedTemplate.color = $event : null"
+                        required
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="name">Template Content:</label>
+                      <textarea
+                        id="content"
+                        name="placeHolder"
+                        class="form-control"
+                        [ngModel]="selectedTemplate ? selectedTemplate.placeHolder : ''"
+                        (ngModelChange)="selectedTemplate ? selectedTemplate.placeHolder = $event : null"
+                        required
+                      ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="name">contact no:</label>
+                      <input
+                        type="number"
+                        id="number"
+                        name="to"
+                        class="form-control"
+                        [ngModel]="selectedTemplate ? selectedTemplate.number : 0"
+                        (ngModelChange)="selectedTemplate ? selectedTemplate.number = $event : null"
+                        required
+                      />
+                    </div>
+                    <hr />
+                    <button type="submit" class="btn btn-primary">
+                      {{ selectedTemplate ? selectedTemplate.id ? "Send" : "Add Template" : 'Save' }}
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
